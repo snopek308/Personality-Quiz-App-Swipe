@@ -14,14 +14,13 @@ namespace StarWarsApp
         public string currentQuestion;
         public int questionIndex = 0;
         public int pointCounter = 0;
-        private string newQuestion;
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand userResponse { protected set; get; }
 
         public QuizDataViewModel()
         {
             //This adds questions to the List that the code will cycle through
-            questionList = new List <Question>
+            questionList = new List<Question>
                 {
                     new Question("Do you prefer to fight for 1) Darkside or 2) Lightside?"),
                     new Question("Do you prefer to 1) pilot in space or 2) drive an airspeeder?"),
@@ -38,17 +37,17 @@ namespace StarWarsApp
             {
                 int response;
                 if (key == "True")
-                    {
+                {
                     //if the user picks the left button, it adds to the left side
-                        pointCounter += 25;
-                         response = 1; 
-                    }
-                else 
-                    {
+                    pointCounter += 25;
+                    response = 1;
+                }
+                else
+                {
                     //if the user picks the right side, it subtracts points
-                        pointCounter -= 25;
-                        response = 0; 
-                    }
+                    pointCounter -= 25;
+                    response = 0;
+                }
                 //this sets up if there is another question to be read to the users
                 if (questionIndex < questionList.Count)
                 {
@@ -66,17 +65,17 @@ namespace StarWarsApp
         //this not only flips the code of the question, but also adds points to and determines the returned value of the character
         public void nextQuestion()
         {
-            if(questionIndex < questionList.Count-1)
+            if (questionIndex < questionList.Count - 1)
             {
                 CurrentQuestion = questionList[++questionIndex].text;
             }
             else
             {
-                if(pointCounter < 0)
+                if (pointCounter < 0)
                 {
                     returnedCharacter("Ventress");
                 }
-                else if(pointCounter <0 && pointCounter <=50)
+                else if (pointCounter < 0 && pointCounter <= 50)
                 {
                     returnedCharacter("Hera");
                 }
@@ -95,6 +94,8 @@ namespace StarWarsApp
             }
         }
 
+
+
         //this method returns the character the person choose
         public void returnedCharacter(string value)
         {
@@ -107,7 +108,7 @@ namespace StarWarsApp
         {
             protected set
             {
-                if(currentQuestion != value)
+                if (currentQuestion != value)
                 {
                     currentQuestion = value;
                     OnPropertyChanged("CurrentQuestion");
@@ -116,7 +117,7 @@ namespace StarWarsApp
             get { return currentQuestion; }
         }
 
-            
+
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
