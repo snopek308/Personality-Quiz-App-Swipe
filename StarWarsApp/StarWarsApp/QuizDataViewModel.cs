@@ -57,7 +57,7 @@ namespace StarWarsApp
             },
             (key) =>
             {
-                return questionIndex >= questionList.Count - 1 ? false : true;
+                return questionIndex >= questionList.Count ? false : true;
             });
 
         }
